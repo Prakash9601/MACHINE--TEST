@@ -30,10 +30,7 @@ class ExpandableListViewModel(val productDao: ProductDao?) : ViewModel() {
     private val itemIdsList = MutableStateFlow(listOf<Int>())
     val itemIds: StateFlow<List<Int>> get() = itemIdsList
 
-    val allCategories: MutableLiveData<List<Category?>>? = productDao?.getAllCategory()
-
-
-
+    val allCategories: LiveData<List<Category?>>? = productDao?.getAllCategory()
 
 
 
@@ -49,6 +46,7 @@ class ExpandableListViewModel(val productDao: ProductDao?) : ViewModel() {
                 if (response.isSuccessful) {
                     val categories = response.body()?.categories ?: emptyList()
                     viewModelScope.launch{
+                        if(response.body()?.categories?.size != allCategories?.value?.size )
                         insertCategories(categories)
                     }
                 }

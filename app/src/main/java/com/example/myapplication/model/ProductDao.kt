@@ -15,7 +15,7 @@ interface ProductDao {
 
 
     @Query("SELECT * FROM Category")
-    fun getAllCategory(): MutableLiveData<List<Category?>>
+    fun getAllCategory(): LiveData<List<Category?>>
 
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
