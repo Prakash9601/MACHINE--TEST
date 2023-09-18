@@ -1,6 +1,7 @@
 package com.example.myapplication.model
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,8 +12,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
+
+
     @Query("SELECT * FROM Category")
-    fun getAllCategory(): Flow<List<Category?>>
+    fun getAllCategory(): MutableLiveData<List<Category?>>
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategories(categories: List<Category>)

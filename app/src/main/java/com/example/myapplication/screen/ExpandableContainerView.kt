@@ -11,8 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.R
-import com.example.myapplication.model.Example
-
+import com.example.myapplication.model.Product
 
 
 @Composable
@@ -20,7 +19,7 @@ fun ExpandableContainerView(
     title: String,
     onClickItem: () -> Unit,
     expanded: Boolean,
-    products: List<Example.Product>?
+    products: ArrayList<Product>?
 ) {
     Box(
         modifier = Modifier

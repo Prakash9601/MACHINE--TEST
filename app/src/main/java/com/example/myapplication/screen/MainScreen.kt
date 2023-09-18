@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.ExpandableListViewModel
@@ -17,8 +18,7 @@ import com.example.myapplication.ExpandableListViewModel
 @Composable
 fun MainScreen(viewModel: ExpandableListViewModel) {
     val itemIds by viewModel.itemIds.collectAsState()
-    val items by viewModel.items.collectAsState()
-
+    val dpItems by viewModel.allCategories!!.observeAsState()
 
 
     Scaffold(
@@ -27,13 +27,13 @@ fun MainScreen(viewModel: ExpandableListViewModel) {
         LazyColumn(modifier = Modifier.padding(padding),
             contentPadding = PaddingValues(5.dp)
         ) {
-            items(items.size){
-                items[it].title?.let { it1 ->
+            items(dpItems?.size?:0){
+                dpItems?.get(it)?.title?.let { it1 ->
                     ExpandableContainerView(
                         title = it1,
                         onClickItem = { viewModel.onItemClicked(it) },
                         expanded = itemIds.contains(it),
-                        products = items[it].products
+                        products = dpItems!![it]?.product
                     )
                 }
             }

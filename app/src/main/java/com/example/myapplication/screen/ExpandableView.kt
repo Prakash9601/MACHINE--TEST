@@ -13,14 +13,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.model.Example
-
+import com.example.myapplication.model.Product
 
 
 @Composable
 fun ExpandableView(
     isExpanded: Boolean,
-    products: List<Example.Product>?
+    products: ArrayList<Product>?
 ) {
     // Opening Animation
     val expandTransition = remember {

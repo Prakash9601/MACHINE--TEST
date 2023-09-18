@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.api.MachineTestRetrofit
@@ -24,13 +26,11 @@ class ExpandableListViewModel(val productDao: ProductDao?) : ViewModel() {
     // Replace with your Retrofit service
     var apiService: MachineTestRetrofit = MachineTestRetrofit.create()
 
-    private val itemsList = MutableStateFlow<List<Example.Category>>(emptyList())
-    val items: StateFlow<List<Example.Category>> get() = itemsList
 
     private val itemIdsList = MutableStateFlow(listOf<Int>())
     val itemIds: StateFlow<List<Int>> get() = itemIdsList
 
-    val allCategories: Flow<List<Category?>>? = productDao?.getAllCategory()
+    val allCategories: MutableLiveData<List<Category?>>? = productDao?.getAllCategory()
 
 
 
@@ -48,7 +48,6 @@ class ExpandableListViewModel(val productDao: ProductDao?) : ViewModel() {
             override fun onResponse(call: Call<Example?>, response: Response<Example?>) {
                 if (response.isSuccessful) {
                     val categories = response.body()?.categories ?: emptyList()
-                    itemsList.value = categories
                     viewModelScope.launch{
                         insertCategories(categories)
                     }

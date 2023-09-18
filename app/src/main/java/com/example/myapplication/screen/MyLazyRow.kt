@@ -25,14 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.myapplication.ProductDetails
-import com.example.myapplication.model.Example
 import com.example.myapplication.model.Product
 
 
 
 
 @Composable
-fun MyLazyRow(products: List<Example.Product>?) {
+fun MyLazyRow(products: ArrayList<Product>?) {
     val mContext= LocalContext.current
     LazyRow(
         modifier = Modifier
