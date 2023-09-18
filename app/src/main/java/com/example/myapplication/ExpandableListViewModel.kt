@@ -47,7 +47,7 @@ class ExpandableListViewModel(val productDao: ProductDao?) : ViewModel() {
                     val categories = response.body()?.categories ?: emptyList()
                     viewModelScope.launch{
                         if(response.body()?.categories?.size != allCategories?.value?.size )
-                        insertCategories(categories)
+                            insertCategories(categories)
                     }
                 }
             }
